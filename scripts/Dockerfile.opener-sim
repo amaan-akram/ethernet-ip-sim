@@ -1,0 +1,41 @@
+FROM alpine:3.13 as builder
+
+RUN apk add --update --no-cache \
+    cmake \ 
+    gcc \
+    make \
+    binutils \
+    libcap-dev \
+    linux-headers \
+    glib \
+    musl-dev \
+    doxygen \
+    git
+
+
+RUN mkdir opener-sim
+COPY OpENer opener-sim/OpENer
+COPY scripts opener-sim/scripts
+
+WORKDIR /opener-sim 
+
+RUN scripts/build.sh
+
+FROM alpine:3.13
+
+RUN apk add --update --no-cache libcap-dev
+
+ARG BUILD_VER
+ARG BUILD_SHA
+ENV VER=$BUILD_VER
+ENV SHA=$BUILD_SHA
+LABEL version="$VER"
+LABEL sha="$SHA"
+LABEL maintainer="iotech <support@iotechsys.com>"
+
+COPY --from=builder opener-sim/OpENer opener-sim/OpENer
+COPY --from=builder opener-sim/scripts opener-sim/scripts
+
+WORKDIR /opener-sim
+
+ENTRYPOINT [ "./scripts/entrypoint.sh" ]

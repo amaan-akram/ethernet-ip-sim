@@ -28,7 +28,11 @@ simulator will run on the eth0 interface as default.
 The Ethernet/ip device service should then be able to communicate with the 
 simulator through the <code>docker:0</code> network interface.
 
-To use the simulator you will need to find the IP address of the running container. First find the container ID using: <code>docker ps</code>
+To use the simulator you will need to find the IP address of the running container. First find the container ID using: 
+
+```
+docker ps
+```
 
 Then find the IP address of the desired container using 
 

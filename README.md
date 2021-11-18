@@ -22,8 +22,9 @@ After building has completed, run the docker container using the following comma
 docker run -i iotechsys/opener-sim:{VERSION} <network_interface> 
 ```
 
-Note: <code><network_interface></code> is optional, if left unspecified the  
-simulator will run on the eth0 interface as default.
+  ***Note:** <code><network_interface></code>
+  is optional, if left unspecified the 
+simulator will run on the eth0 interface as default.*
 
 The Ethernet/ip device service should then be able to communicate with the 
 simulator through the <code>docker:0</code> network interface.

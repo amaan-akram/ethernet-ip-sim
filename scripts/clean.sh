@@ -2,4 +2,4 @@
 . ./scripts/env.sh
 
 
-docker rmi $EXP/opener-sim:$VER-$ARCH
+docker rmi $EXP/ethernet-ip-sim:$VER-$ARCH

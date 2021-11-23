@@ -1,10 +1,6 @@
 #!/bin/sh
 
-cd OpENer/bin/posix
+cd rta-ethernet-ip-stack/
 
-./setup_posix.sh
-
-make | tee opener-make.log
-
-setcap cap_net_raw+ep ./src/ports/POSIX/OpENer
+make
 

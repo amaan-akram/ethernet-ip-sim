@@ -4,7 +4,7 @@ networkInterface=${@:-eth0}
 
 echo "Starting sim on interface $networkInterface"
 
-cd OpENer/bin/posix
+cd rta-ethernet-ip-stack
 
 echo "Running sim..."
-./src/ports/POSIX/OpENer $networkInterface
+./rta-server $networkInterface

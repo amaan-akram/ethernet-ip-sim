@@ -1,0 +1,30 @@
+FROM debian:stable as builder
+
+
+RUN apt-get update &&\
+	apt-get install -y git make gcc cmake musl-dev
+
+RUN mkdir ethernet-ip-sim
+COPY rta-ethernet-ip-stack ethernet-ip-sim/rta-ethernet-ip-stack
+COPY scripts ethernet-ip-sim/scripts
+
+WORKDIR /ethernet-ip-sim
+
+RUN scripts/build.sh
+
+FROM debian:stable
+
+ARG BUILD_VER
+ARG BUILD_SHA
+ENV VER=$BUILD_VER
+ENV SHA=$BUILD_SHA
+LABEL version="$VER"
+LABEL sha="$SHA"
+LABEL maintainer="iotech <support@iotechsys.com>"
+
+COPY --from=builder ethernet-ip-sim/rta-ethernet-ip-stack ethernet-ip-sim/rta-ethernet-ip-stack
+COPY --from=builder ethernet-ip-sim/scripts ethernet-ip-sim/scripts
+
+WORKDIR /ethernet-ip-sim
+
+ENTRYPOINT [ "./scripts/entrypoint.sh" ]

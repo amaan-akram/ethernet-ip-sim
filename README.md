@@ -65,3 +65,19 @@ and run the the desired networkInterface:
 ```
 ./rta-server <NetworkInterface>
 ```
+
+## Stopping The Simulator
+
+When running with the docker command you can stop the simulator using the `docker stop` command:
+
+```
+docker stop ethernetip-sim
+```
+
+You can also kill the container:
+
+```
+docker kill ethernetip-sim
+```
+
+When running the sim as a local binary the sim can be terminated by using `ctrl + c`
